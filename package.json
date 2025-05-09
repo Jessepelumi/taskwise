@@ -1,0 +1,21 @@
+{
+  "name": "taskwise",
+  "version": "1.0.0",
+  "description": "Multi-user Task Management System",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "dev": "nodemon ./src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jesse Adesina",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
