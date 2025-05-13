@@ -8,6 +8,10 @@
     "start": "node dist/server.js",
     "dev": "nodemon --watch src --ext ts --exec \"node --import ./register.js src/server.ts\"",
     "build": "tsc",
+    "generate": "drizzle-kit generate",
+    "push": "drizzle-kit push",
+    "migrate": "tsx src/migrate.ts",
+    "test-connection": "node --loader ts-node/esm test-db-connection.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jesse Adesina",
@@ -18,7 +22,8 @@
     "drizzle-orm": "^0.43.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "postgres": "^3.4.5"
+    "postgres": "^3.4.5",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
