@@ -15,7 +15,7 @@ export const findUserById = async (
 
     // validate ID
     if (isNaN(parsedId)) {
-      res.status(400).json({ message: `'${req.params.id}' is not a valid ID` });
+      res.status(400).json({ message: `'${req.params.id}' is not a valid ID.` });
       return;
     }
 
@@ -28,7 +28,7 @@ export const findUserById = async (
     if (existingUser.length === 0) {
       res
         .status(400)
-        .json({ message: `User with ID '${parsedId}' was not found` });
+        .json({ message: `User with ID '${parsedId}' was not found.` });
       return;
     }
 
