@@ -15,7 +15,20 @@ export const createUser = async (
   try {
     // validate request body (incoming data)
     const validatedData = createUserSchema.parse(req.body);
-    const { name, email, password } = validatedData;
+    const { name, email, password, role } = validatedData;
+
+    // enforce admin-only admin creation
+    if (role === "admin") {
+      const customReq = req as CustomRequest;
+
+      // if no user is logged in or not an admin
+      if (!customReq.role || customReq.role !== "admin") {
+        res.status(403).json({
+          message: "Admin account is required to create another admin.",
+        });
+        return;
+      }
+    }
 
     // check is user already exists
     const existingUser = await db
@@ -36,7 +49,7 @@ export const createUser = async (
     // insert user
     const newUser = await db
       .insert(users)
-      .values({ name, email, password: hashedPassword })
+      .values({ name, email, password: hashedPassword, role })
       .returning();
 
     res
@@ -103,9 +116,34 @@ export const updateUser = async (
     // validate incoming fields
     const validatedData = updateUserSchema.parse(req.body);
 
+    // regular users cannot send a role change at all (better security)
+    if (req.role !== "admin" && "role" in validatedData) {
+      delete validatedData.role;
+    }
+
     // nothing to update
     if (Object.keys(validatedData).length === 0) {
       res.status(400).json({ message: "No valid fields to update." });
+      return;
+    }
+
+    // Only admin can promote someone to admin
+    if (validatedData.role === "admin" && req.role !== "admin") {
+      res.status(403).json({
+        message: "Only admins can promote a user to admin.",
+      });
+      return;
+    }
+
+    // admins cannot demote themselves
+    if (
+      userId === req.user?.id &&
+      validatedData.role === "user" &&
+      req.role === "admin"
+    ) {
+      res.status(403).json({
+        message: "Admins cannot demote themselves.",
+      });
       return;
     }
 
@@ -116,7 +154,9 @@ export const updateUser = async (
         .where(eq(users.email, validatedData.email));
 
       if (emailExists.length > 0) {
-        res.status(400).json({ message: `This email — '${validatedData.email}' is already in use.` });
+        res.status(400).json({
+          message: `This email — '${validatedData.email}' is already in use.`,
+        });
         return;
       }
     }
