@@ -29,6 +29,7 @@ export const createUserSchema = z.object({
     .refine((val) => /[!@#$%^&*(),.?":{}|<>]/.test(val), {
       message: "Password must include at least one special character",
     }),
+  role: z.enum(["admin", "user"]).optional().default("user"),
 });
 
 export const updateUserSchema = z.object({
@@ -55,4 +56,5 @@ export const updateUserSchema = z.object({
       message: "Password must include at least one special character",
     })
     .optional(),
+  role: z.enum(["admin", "user"]).optional(),
 });
