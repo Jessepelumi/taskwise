@@ -21,7 +21,7 @@ const config: Config = {
   nodeEnv: process.env.NODE_ENV || "development",
   dbUrl: process.env.DATABASE_URL,
   jwtSecret: process.env.JWT_SECRET,
-  jwtExpiresIn: (process.env.JWT_EXPIRES_IN || "7d") as string,
+  jwtExpiresIn: (process.env.JWT_EXPIRES_IN || "5m") as string,
 };
 
 export default config;
