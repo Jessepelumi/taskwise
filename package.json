@@ -2,7 +2,7 @@
   "name": "taskwise",
   "version": "1.0.0",
   "description": "Multi-user Task Management System",
-  "main": "dist/server.ts",
+  "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
