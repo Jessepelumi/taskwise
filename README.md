@@ -5,5 +5,5 @@
 ###### Languages, Technologies, & Tools
 - TypeScript
 - Node.js & Express
-- PostgreSQL 
-- Supabase
+- Supabase (PostgreSQL)
+- Drizzle ORM
