@@ -6,12 +6,7 @@ import { lookup as dnsLookup } from "dns";
 
 const connectionString = config.dbUrl;
 
-// const client = postgres(connectionString);
-
-const client = postgres(connectionString, {
-  hostname: undefined,
-  lookup: (dnsLookup as any).bind(null),
-} as any);
+const client = postgres(connectionString, { prepare: false });
 
 const db = drizzle(client, { schema });
 
