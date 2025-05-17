@@ -1,9 +1,10 @@
 import { Router } from "express";
 import {
   createTask,
-  getAssignedTasks,
-  getCreatedTask,
+  deleteTask,
+  getAllTasks,
   getTasks,
+  updateTask,
 } from "../controllers/taskController";
 import { authenticateToken } from "../middlewares/authMiddleware";
 
@@ -14,8 +15,9 @@ router.use(authenticateToken);
 router.post("/", createTask);
 
 router.get("/", getTasks);
+router.get("/all", getAllTasks);
 
-router.get("/created", getCreatedTask);
-router.get("/assigned", getAssignedTasks);
+router.patch("/:id", updateTask);
+router.delete("/:id", deleteTask);
 
 export default router;
