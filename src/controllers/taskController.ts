@@ -140,7 +140,7 @@ export const updateTask = async (
     if (!isCreator && !isAdmin) {
       res.status(403).json({
         message:
-          "Unauthorized — Only the creator or an admin can delete this task.",
+          "Unauthorized — Only the creator or an admin can update this task.",
       });
       return;
     }
