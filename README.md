@@ -40,6 +40,6 @@ npm install
 ## 🌐 Live API
 
 A live version of the API is available here:  
-🔗 [https://taskwise-js54.onrender.com/api/tasks](https://taskwise-js54.onrender.com/api/tasks)
+🔗 [https://taskwise-js54.onrender.com](https://taskwise-js54.onrender.com)
 
 > You can use this URL with Postman, Insomnia, or cURL to test endpoints in real time.
